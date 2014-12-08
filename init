@@ -1,0 +1,69 @@
+#!/bin/bash
+
+set -e
+
+MKDOCS_PROJECT=${MKDOCS_PROJECT:-}
+if [ -z "$MKDOCS_PROJECT" ]; then
+   MKDOCS_PROJECT=$2
+fi
+
+appNew () {
+   mkdocs new $MKDOCS_PROJECT
+}
+
+appBuild () {
+   cd $MKDOCS_PROJECT
+   mkdocs build --clean
+}
+
+appVersion () {
+   pip freeze | grep mkdocs
+}
+
+appServer () {
+   cd $MKDOCS_PROJECT
+   /sbin/my_init -- mkdocs serve --dev-addr=0.0.0.0:8000
+}
+
+appHelp () {
+  echo "Available options:"
+  echo " new <project>    - Create a new project"
+  echo " server <project> - Start a web server for the project"
+  echo " build <project>  - Build the project"
+  echo " version          - Show mkdocs version"
+  echo " help             - Display the help"
+  echo " [command]        - Execute the specified linux command eg. bash."
+}
+
+case "$1" in
+  new)
+    appNew
+    ;;
+  server)
+    appServer
+    ;;
+  build)
+    appBuild
+    ;;
+  version)
+    appVersion
+    ;;
+  help)
+    appHelp
+    ;;
+  *)
+    if [ -x $1 ]; then
+      $1
+    else
+      prog=$(which $1)
+      if [ -n "${prog}" ] ; then
+        shift 1
+        $prog $@
+      else
+        appHelp
+      fi
+    fi
+    ;;
+esac
+
+exit 0
