@@ -1,6 +1,6 @@
 # MkDocs
 
-This is a simple Docker container for running the [MkDocks](http://www.mkdocs.org) documentation site builder tool
+This is a simple Docker container for running the [MkDocs](http://www.mkdocs.org) documentation site builder tool
 
 ### Inspired by and based on
 
