@@ -1,10 +1,6 @@
 # MkDocs
 
-This is a simple Docker container for running the [MkDocs](http://www.mkdocs.org) documentation site builder tool
-
-### Inspired by and based on
-
-The work of Sammeer Naik in [gitlab](https://github.com/sameersbn/docker-gitlab) and others docker containers
+This is a simple Docker container for running the [MkDocs](http://www.mkdocs.org) documentation site builder tool. Many of the stuff here I've learned from the work of Sammeer Naik in [gitlab](https://github.com/sameersbn/docker-gitlab) and others docker containers
 
 ### Usage
 
