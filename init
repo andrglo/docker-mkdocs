@@ -2,17 +2,13 @@
 
 set -e
 
-MKDOCS_PROJECT=${MKDOCS_PROJECT:-}
-if [ -z "$MKDOCS_PROJECT" ]; then
-   MKDOCS_PROJECT=$2
-fi
+MKDOCS_PROJECT=$2
 
 appNew () {
-   mkdocs new $MKDOCS_PROJECT
+   mkdocs new "$MKDOCS_PROJECT"
 }
 
 appBuild () {
-   cd $MKDOCS_PROJECT
    mkdocs build --clean
 }
 
@@ -20,27 +16,26 @@ appVersion () {
    pip freeze | grep mkdocs
 }
 
-appServer () {
-   cd $MKDOCS_PROJECT
-   /sbin/my_init -- mkdocs serve --dev-addr=0.0.0.0:8000
+appServe () {
+   mkdocs serve --dev-addr=0.0.0.0:8000
 }
 
 appHelp () {
   echo "Available options:"
-  echo " new <project>    - Create a new project"
-  echo " server <project> - Start a web server for the project"
-  echo " build <project>  - Build the project"
-  echo " version          - Show mkdocs version"
-  echo " help             - Display the help"
-  echo " [command]        - Execute the specified linux command eg. bash."
+  echo " serve <project> - Start a web server for the project"
+  echo " new <project>   - Create a new project"
+  echo " build <project> - Build the project"
+  echo " version         - Show mkdocs version"
+  echo " help            - Displays the help"
+  echo " [command]       - Execute the specified linux command"
 }
 
 case "$1" in
+  serve)
+    appServe
+    ;;
   new)
     appNew
-    ;;
-  server)
-    appServer
     ;;
   build)
     appBuild

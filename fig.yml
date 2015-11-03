@@ -1,9 +1,0 @@
-web:
-  build: .
-  ports:
-     - "8000:8000"
-  volumes:
-     - ~/repos/mkdocs:/workspace
-  hostname: mkdocs
-  environment:
-     - MKDOCS_PROJECT=my-project
